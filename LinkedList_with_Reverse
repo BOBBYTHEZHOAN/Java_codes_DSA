@@ -1,0 +1,131 @@
+package org.example;
+
+
+
+
+public class LinkedList {
+
+
+    private class Node {
+        int value;
+        Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+    }
+
+
+    static Node first;
+     static Node last;
+
+
+    public void addLast(int value){
+        Node node = new Node(value);
+
+        if (first == null)
+            first = last = node;
+        else {
+            last.next = node;
+            last = node;
+
+
+        }
+    }
+    public void print(){
+        Node currnode = first;
+
+
+        while(currnode!=null)
+        {
+            System.out.print(currnode.value+"->");
+            currnode=currnode.next;
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+    public void addFirst(int item) {
+        Node node = new Node(item);
+        if (first == null)
+            first = last = node;
+        else {
+            node.next = first;
+            first = node;
+        }
+
+    }
+
+    public Node getpreviousNode(Node node){
+      Node temp = first;
+
+      while(temp.next != node) {
+          temp = temp.next;
+      }
+      return temp;
+
+    }
+
+
+
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        //System.out.println(list1.getpreviousNode(first).value);
+        list.addFirst(10);
+        list.addLast(20);
+        list.addLast(30);
+        list.addLast(40);
+        list.addFirst(50);
+        list.addFirst(60);
+        list.print();
+        System.out.println("\n");
+        list.Reverse();
+        //System.out.println(last.value);
+        list.print();
+
+    }
+
+    public void Reverse(){
+        Node temp = first;
+        Node temp1 = null;
+        Node temp2 = last;
+
+        while(temp != null){
+            temp2 = temp;
+            temp = temp.next;
+            temp2.next = temp1;
+            temp1 = temp2;
+            first = temp2;
+
+
+        }
+
+
+    }
+    public void Reverse2(){
+        Node temp = last;
+        Node temp1 = null;
+        Node temp2 = first;
+        first = last;
+
+        while(temp != null){
+            temp2 = temp;
+            temp = getpreviousNode(temp);
+            temp2.next = temp;
+            temp.next = getpreviousNode(temp);
+            last = temp2;
+        }
+    }
+
+
+
+
+}
