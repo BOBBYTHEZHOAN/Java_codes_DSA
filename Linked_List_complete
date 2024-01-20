@@ -1,0 +1,153 @@
+package org.example;
+
+//ps-class linked lists
+// strategy-public class, class node, define first and last node, add first, add last , delete first, delete last, index, size, reverse
+public class LinkedList {
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int Value) {
+            this.value = Value;
+        }
+    }
+
+
+    private Node first;
+    private Node last;
+
+
+    public void addlast(int item) {
+        Node node = new Node(item);   //or var node = new Node(item); or new Node(); but then next line would need to be node.value = item;
+
+        if (first == null)
+            first = last = node;
+        else {
+            last.next = node;
+            last = node;
+        }
+
+    }
+
+    public void addFirst(int item) {
+        Node node1 = new Node(item);
+        if (first == null)
+            first = last = node1;
+        else {
+            node1.next = first;
+            first = node1;
+        }
+
+    }
+    public void print()
+    {
+        Node temp = first;
+        while(temp!=null)
+        {
+            System.out.print(temp.value+"->");
+            temp=temp.next;
+        }
+    }
+    public int indexof(int value)
+    {
+        Node temp =first;
+        int index=0;
+        while(temp!=null)
+        {
+            index++;
+            if(temp.value==value)
+                return index;
+            temp=temp.next;
+        }
+        return -1;
+    }
+    public boolean ifcontains(int value)
+    {
+        Node temp =first;
+        int index=0;
+        while(temp!=null)
+        {
+            index++;
+            if(temp.value==value)
+                return true;
+            temp=temp.next;
+        }
+        return false;
+    }
+    public boolean removefirst()
+    {
+        if(first==null)
+            return false;
+        else
+        {
+            first=first.next;
+            return true;
+        }
+    }
+    public boolean remoovelast()
+    {
+        if(first==null)
+            return false;
+        else
+        {
+            Node temp = first;
+            Node previous=first;
+            while(temp.next!=null)
+            {
+                previous=temp;
+                temp=temp.next;
+            }
+            previous.next=null;
+            last=previous;
+            return true;
+        }
+
+    }
+    public Node getpreviious()
+    {
+        Node temp = first;
+        Node previous=first;
+        while(temp.next!=null)
+        {
+            previous=temp;
+            temp=temp.next;
+        }
+        return previous;
+    }
+    public int size()
+    {
+        Node temp =first;
+        int index=0;
+        while(temp!=null)
+        {
+            index++;
+            temp=temp.next;
+        }
+        return index;
+    }
+    //[10->20->30->40]--[40->30->20->10]
+    public void reverse() {
+        if (first == null || first.next == null) {
+            // If the list is empty or has only one element, it's already reversed
+            return;
+        }
+
+        Node current = first;
+        Node prev = null;
+        Node next = null;
+
+        while (current != null) {
+            next = current.next; // Save the next node
+            current.next = prev; // Reverse the link
+
+            // Move one step forward in the list
+            prev = current;
+            current = next;
+        }
+
+        // Update 'first' and 'last' after reversing the list
+        last = first;
+        first = prev;
+    }
+    
+}
