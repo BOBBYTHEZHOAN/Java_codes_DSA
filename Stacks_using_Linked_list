@@ -1,0 +1,56 @@
+package org.example;
+
+public class linkedstack {
+    class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+        private Node top;
+        public void linkedstack() {
+            this.top = null;
+        }
+
+
+        public boolean isEmpty() {
+            return top == null;
+        }
+
+
+        public void push(int data) {
+            Node newNode = new Node(data);
+            newNode.next = top;
+            top = newNode;
+
+        }
+
+
+        public int pop() {
+            if (isEmpty()) {
+                System.out.println("Stack is empty");
+                return -1;
+            }
+            int poppedValue = top.data;
+            top = top.next;
+            return poppedValue;
+        }
+
+    public static void main(String[] args) {
+        linkedstack s1 = new linkedstack();
+        s1.push(1);
+        s1.push(2);
+        s1.push(3);
+        s1.push(4);
+        System.out.println(s1.pop());
+        System.out.println(s1.pop());
+        System.out.println(s1.pop());
+        System.out.println(s1.pop());
+
+    }
+
+
+}
