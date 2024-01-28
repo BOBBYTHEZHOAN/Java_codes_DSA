@@ -1,0 +1,76 @@
+package org.example;
+
+//* Problem statement: create stacks using array along with its functionality of push, pop and peek
+
+import java.util.EmptyStackException;
+
+public class stacks {
+    int[] stackArr;
+    int defaultSize = 5;
+    int ptr = -1;
+
+    public stacks()
+    {
+        stackArr = new int[this.defaultSize];
+    }
+
+    public stacks(int size){
+        this.defaultSize = size;
+        stackArr = new int[this.defaultSize];
+    }
+
+    public boolean push(int item){
+        if(isFull()){
+            return false;
+        }
+        stackArr[++ptr] = item;
+        return true;
+    }
+
+    public void printStack(){
+        for (int i = 0; i <= ptr; i++) {
+            System.out.println(stackArr[i]);
+        }
+    }
+
+    private boolean isFull(){
+        if(ptr >= stackArr.length)
+            return true;
+        return false;
+    }
+
+    private boolean isEmpty(){
+        if(ptr == -1)
+            return true;
+
+        return false;
+    }
+
+    public int pop(){
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        return stackArr[ptr--];
+        // return 0;
+    }
+
+    public int peek(){
+        return stackArr[ptr];
+                    }
+
+
+    public static void main(String[] args) {
+        stacks s1= new stacks();
+        s1.push(1);
+        s1.push(2);
+        s1.push(3);
+        s1.push(4);
+        System.out.println(s1.pop());
+        System.out.println(s1.pop());
+        System.out.println(s1.pop());
+        System.out.println(s1.pop());
+
+
+    }
+}
+
