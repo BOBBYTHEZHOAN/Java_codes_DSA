@@ -1,0 +1,113 @@
+package org.example;
+
+import java.util.EmptyStackException;
+
+public class stackm {
+    int[] stackArr;
+    static int[] minarr;
+    int i=0;
+
+    int j,k;
+    int defaultSize = 5;
+    int ptr = -1;
+
+    public stackm()
+    {
+        stackArr = new int[this.defaultSize];
+        minarr = new int[this.defaultSize];
+    }
+
+    public stackm(int size){
+        this.defaultSize = size;
+        stackArr = new int[this.defaultSize];
+        minarr = new int[this.defaultSize];
+        minarr[0]=0;
+    }
+
+    public boolean push(int item){
+        if(isFull()){
+            return false;
+        }
+        stackArr[++ptr] = item;
+        /* if(item < minarr[0]){
+            minarr[0]=item;
+        }
+        else {
+            minarr[ptr]=item;
+        } */
+        minarr[ptr] =item;
+        if(ptr == this.defaultSize-1) {
+            for (int k = 0; k < this.defaultSize; k++) {
+                for (int j = 0; j < this.defaultSize - 1; j++) {
+                    if (minarr[j] > minarr[j + 1]) {
+                        int temp = minarr[j];
+                        minarr[j] = minarr[j + 1];
+                        minarr[j + 1] = temp;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public void printStack(){
+        for (int i = 0; i <= ptr; i++) {
+            System.out.println(stackArr[i]);
+        }
+    }
+
+    private boolean isFull(){
+        if(ptr >= stackArr.length)
+            return true;
+        return false;
+    }
+
+    private boolean isEmpty(){
+        if(ptr == -1)
+            return true;
+
+        return false;
+    }
+
+    public int pop(){
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        for(i=0;i<this.defaultSize-1;i++){
+            minarr[i] = minarr[i+1];
+        }
+        return stackArr[ptr--];
+        // return 0;
+    }
+
+    public int min(){
+        if(isEmpty()){
+            throw new EmptyStackException();
+        }
+        else
+            return minarr[0];
+    }
+    public int peek(){
+        return stackArr[ptr];
+    }
+
+
+    public static void main(String[] args) {
+        stackm s1= new stackm();
+        s1.push(6);
+        s1.push(7);
+        s1.push(5);
+        s1.push(4);
+        s1.push(2);
+
+        System.out.println(s1.min());
+        System.out.println(s1.pop());
+        System.out.println(s1.min());
+
+
+
+
+
+    }
+}
