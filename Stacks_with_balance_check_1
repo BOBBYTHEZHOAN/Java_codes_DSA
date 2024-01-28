@@ -1,0 +1,62 @@
+package org.example;
+
+import java.util.Stack;
+
+public class Stack1 {
+    public String reverseString(String str) {
+        Stack<Character> stack = new Stack<>();
+        char[] cArray = str.toCharArray();
+        for (char c : cArray) {
+            stack.push(c);
+        }
+
+        String reversed = "";
+        while (!stack.empty()) {
+            reversed = reversed + stack.pop();
+        }
+        return reversed;
+    }
+    public boolean checkbalance(String balanced){
+
+        Stack<Character> stack = new Stack<>();
+        char [] cArray = balanced.toCharArray();
+        for(char x : cArray){
+            if(x == '(' || x == '[' || x == '{'){
+                stack.push(x);
+                continue;
+            }
+
+            if(stack.empty())
+                return false;
+            char c;
+            switch (x) {
+                case ')':
+                    c = stack.pop();
+                    if (c == '{' || c == '[')
+                        return false;
+                    break;
+
+                case '}':
+                    c = stack.pop();
+                    if (c == '(' || c == '[')
+                        return false;
+                    break;
+
+                case ']':
+                    c = stack.pop();
+                    if (c == '(' || c == '{')
+                        return false;
+                    break;
+            }
+
+
+            stack.pop();
+        }
+        return stack.empty();
+    }
+
+    public static void main(String[] args) {
+        Stacks stacks = new Stacks();
+        System.out.println("is eq balanced:"+stacks.checkbalance("{}"));
+    }
+}
