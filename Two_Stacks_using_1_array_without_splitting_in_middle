@@ -1,0 +1,92 @@
+package org.example;
+
+public class twoStacks_2 {
+    int[] arr;
+    int size;
+    int t1, t2;
+
+    // Constructor
+    twoStacks_2(int n)
+    {
+        size = n;
+        arr = new int[n];
+        t1 = 0;
+        t2 = n-1;
+    }
+
+
+    void push1(int x)
+    {
+
+
+        if (t1 != t2) {
+            arr[t1] = x;
+            t1++;
+
+        }
+        else {
+            System.out.println("no space");
+
+        }
+    }
+
+
+    void push2(int x)
+    {
+
+
+        if (t2 != t1) {
+
+            arr[t2] = x;
+            t2--;
+        }
+        else {
+            System.out.println("no space " );
+
+        }
+    }
+
+
+    int pop1()
+    {
+        if (t1 < t2 ) {
+            int x = arr[t1];
+            t1--;
+            return x;
+        }
+        else {
+
+            System.exit(1);
+        }
+        return 0;
+    }
+
+
+    int pop2()
+    {
+        if (t2 > t1) {
+            int x = arr[t2];
+            t2++;
+            return x;
+        }
+        else {
+
+            System.exit(1);
+        }
+        return 1;
+    }
+
+    public static void main(String[] args) {
+        twoStacks s2 = new twoStacks(5);
+        s2.push1(5);
+        s2.push2(10);
+        s2.push2(15);
+        s2.push1(11);
+        s2.push2(7);
+        System.out.println(s2.pop1());
+        System.out.println(s2.pop1());
+
+        System.out.println(s2.pop2());
+        System.out.println(s2.pop2());
+    }
+}
